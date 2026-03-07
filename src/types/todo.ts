@@ -7,6 +7,9 @@ export interface Todo {
   todo: string;
   completed: boolean;
   userId: number;
+  // Marks todos created locally that have not been persisted by the API.
+  // When true, delete/toggle skip the API call and operate only on local state.
+  isLocal?: boolean;
 }
 
 // ─── API Response Types ───────────────────────────────────────────────────────
@@ -34,12 +37,4 @@ export interface PaginationState {
   currentPage: number;
   totalPages: number;
   total: number;
-}
-
-export interface TodosState {
-  todos: Todo[];
-  pagination: PaginationState;
-  activeFilter: TodoStatus;
-  isLoading: boolean;
-  error: string | null;
 }
