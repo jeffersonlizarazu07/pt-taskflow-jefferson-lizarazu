@@ -38,12 +38,11 @@ async function handleResponse<T>(response: Response): Promise<T> {
 
 // ─── Service Functions ────────────────────────────────────────────────────────
 
-export async function fetchTodos(
-    limit: number,
-    skip: number
-): Promise<TodosResponse> {
-    const response = await fetch(`${TODOS_RESOURCE}?limit=${limit}&skip=${skip}`);
-    return handleResponse<TodosResponse>(response);
+export async function fetchAllTodos(
+): Promise<Todo[]> {
+    const response = await fetch(`${TODOS_RESOURCE}?limit=0`);
+    const data = await handleResponse<TodosResponse>(response);
+    return data.todos
 }
 
 export async function createTodo(payload: CreateTodoPayload): Promise<Todo> {
